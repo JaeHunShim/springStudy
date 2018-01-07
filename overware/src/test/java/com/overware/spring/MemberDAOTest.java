@@ -24,13 +24,13 @@ public class MemberDAOTest {
 	}
 	@Test
 	public void testInserMember() throws Exception{
-		// vo객체에 set 해주고 insert매소드 실행 
+		// 파라미터로 넘어온 값을 vo객체에 set 해주고 insert매소드 실행 
 		MemberVO vo= new MemberVO();
 		vo.setUserid("jaehuniya");
 		vo.setUserpw("wognsl83");
 		vo.setUsername("심재훈");
 		vo.setEmail("tlawogns3456@naver.com");
+		//set해준 데이터들을 처리
 		dao.insertMember(vo);
 	}
-
 }
