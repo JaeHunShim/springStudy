@@ -15,9 +15,9 @@
 	<!-- 여기서 id가 의미하는 것은 스프링에서 빈을 찾기위해서 사용하는 가명이라 생각하면 됨 -->
 	<bean id="dataSource"
 		class="org.springframework.jdbc.datasource.DriverManagerDataSource">
-	<property name="driverClassName" value="com.mysql.jdbc.Driver"></property>
+	<property name="driverClassName" value="net.sf.log4jdbc.sql.jdbcapi.DriverSpy"></property>
 	
-	<property name="url" value="jdbc:mysql://127.0.0.1:3306/book_ex?useSSL=false"></property>	
+	<property name="url" value="jdbc:log4jdbc:mysql://127.0.0.1:3306/book_ex?useSSL=false"></property>	
 	<property name="username" value="root"></property>
 	<property name="password" value="1234"></property>
 	</bean>
@@ -27,5 +27,17 @@
 		<property name="dataSource" ref="dataSource"></property>
 		<!-- 스프링이 동작할때 mybatis-config가 같이 작동하도록 설정 -->
 		<property name="configLocation" value="classpath:/mybatis-config.xml"></property>
+		<property name="mapperLocations" value="classpath:mappers/**/*Mapper.xml"></property>
+	</bean>
+	<!-- DB와 연결을 맺고, 작업완련후 close하는 부분을 편하게 해주는 기능(기본적으로 트랜잭션이나 쓰레드의 처리도 지원해줌) -->
+	<bean id="sqlSession" class="org.mybatis.spring.SqlSessionTemplate"
+		 destroy-method="clearCache">
+		<constructor-arg name="sqlSessionFactory" ref="sqlSessionFactory"></constructor-arg>
+	</bean>
+	<context:component-scan base-package="com.overware.persistence"></context:component-scan>
+	
+	<bean
+		class="org.springframework.jdbc.datasource.DriverManagerDataSource">
 	</bean>
 </beans>
+

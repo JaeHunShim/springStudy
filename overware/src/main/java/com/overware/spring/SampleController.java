@@ -10,9 +10,9 @@ public class SampleController {
 
 	private static final Logger logger=LoggerFactory.getLogger(SampleController.class);
 	// 리턴타입이 void이기 때문에 해당페이지를 호출하게 된다.
-	@RequestMapping("doA")
+	@RequestMapping("/doA")
 	public void doA() {
-		logger.info("doa 호출");
+		logger.info("doA 호출");
 	}
 	@RequestMapping("ex")
 	public void ex() {
