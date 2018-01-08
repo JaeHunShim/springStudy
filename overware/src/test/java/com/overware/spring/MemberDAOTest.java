@@ -22,7 +22,7 @@ public class MemberDAOTest {
 		
 		System.out.println(dao.getTime());
 	}
-	@Test
+	@Test// 잘돌아감
 	public void testInserMember() throws Exception{
 		// 파라미터로 넘어온 값을 vo객체에 set 해주고 insert매소드 실행 
 		MemberVO vo= new MemberVO();
