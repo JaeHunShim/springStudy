@@ -4,12 +4,12 @@ import java.sql.Date;
 
 public class MemberVO {
 
-	private String userid;
-	private String userpw;
-	private String username;
-	private String email;
-	private Date regdate;
-	private Date updatedate;
+	private String userid;//사용자 아이디
+	private String userpw;//사용자 패스워드
+	private String username;//사용자 이름
+	private String email;//사용자 이메일
+	private Date regdate;//가입날짜
+	private Date updatedate;//업데이트 날짜
 	public String getUserid() {
 		return userid;
 	}
