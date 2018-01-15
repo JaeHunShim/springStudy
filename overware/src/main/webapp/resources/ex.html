@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+<meta charset="utf-8">
+<script src="/resources/plugins/jQuery/jQuery-2.1.4.min.js"></script>
+
+</head>
+<body>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/3.0.1/handlebars.js"></script>
+
+<div id="displayDiv">
+</div>
+<div id="displyDiv2">
+</div>
+
+<ul id="replies">
+</ul>
+<script>
+	//source에는 태그와 들어갈 객체를 담고, template에 소스를 넣고, data에 해당 객체에 대한 값을 넣고  해당 아이에 .html() 해주면 해당 태그뒤에 붙어서 값이 나온다 
+	var source="<h1><p> {{name}}</p> <p>{{userid}}</p> <p> {{addr}}</p></h1>"
+	var template=Handlebars.compile(source);
+	var data={name:"심재훈" ,userid:"jaehuniya",addr:"우아아앙"};
+	
+	$("#displayDiv").html(template(data));
+</script>
+<script id= "template2" type="text/x-handlebars-template">
+	<span>{{name}}</span>
+	<div>
+		<span>{{userid}}</span><br>
+		<span>{{addr}}</span>
+	</div>
+</script>
+<script>
+	var source=$("#template2").html();
+	var template=Handlebars.compile(source);
+	var data={name:"심재훈" ,userid:"jaehuniya",addr:"우아아앙"};
+	$("#displyDiv2").html(template(data));
+</script>
+
+<!-- template에 id를 주고  each . 을 사용해서 해당 태그와 태그 안의 값을 반복적으로 만든다. -->
+<script id= "template" type="text/x-handlebars-template">
+{{#each .}}
+	<li class="replyLi">
+		<div>{{name}}</div>
+		<div>{{userid}}</div>
+		<div>{{addr}}</div>
+	</li>
+{{/each}}
+</script>
+<script>
+	var source=$("#template").html();
+	var template=Handlebars.compile(source);
+	var data=[
+				{name:"심재훈" ,userid:"jaehuniya",addr:"우아아앙"},
+				{name:"심재훈1" ,userid:"jaehuniya",addr:"우아아앙"},
+				{name:"심재훈2" ,userid:"jaehuniya",addr:"우아아앙"},
+				{name:"심재훈3" ,userid:"jaehuniya",addr:"우아아앙"},
+				{name:"심재훈4" ,userid:"jaehuniya",addr:"우아아앙"},
+				{name:"심재훈5" ,userid:"jaehuniya",addr:"우아아앙"},
+				{name:"심재훈6" ,userid:"jaehuniya",addr:"우아아앙"},
+				{name:"심재훈7" ,userid:"jaehuniya",addr:"우아아앙"},
+				{name:"심재훈8" ,userid:"jaehuniya",addr:"우아아앙"},
+				{name:"심재훈9" ,userid:"jaehuniya",addr:"우아아앙"},
+				{name:"심재훈0" ,userid:"jaehuniya",addr:"우아아앙"},
+				{name:"심재훈11" ,userid:"jaehuniya",addr:"우아아앙"},
+				{name:"심재훈12" ,userid:"jaehuniya",addr:"우아아앙"},
+				{name:"심재훈13" ,userid:"jaehuniya",addr:"우아아앙"},
+				{name:"심재훈14" ,userid:"jaehuniya",addr:"우아아앙"},
+				
+			];		
+	$("#replies").html(template(data));
+</script>
+</body>
+</html>
