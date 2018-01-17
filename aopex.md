@@ -83,12 +83,12 @@ AOP관련 연습1(AOP적용 하기위한 준비)
 		public MessageVO readMessage(Integer mid) throws Exception;
 		//업데이트
 		public void updateState(Integer mid) throws Exception;
-}
+	}
 
 	public interface PointDAO {
 		//포인트 증가,감소(Impl에서는 map으로 set:두개의 파라미터를 사용하니까 )
 		public void updatePoint(String uid, int point) throws Exception;
-}
+	}
 ###Mapper(Message,Point)
 	<mapper namespace="com.overware.mapper.MessageMapper">
 
