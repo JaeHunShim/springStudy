@@ -31,7 +31,7 @@ AOP관련 연습1(AOP적용 하기위한 준비)
 	 <!--aop 빈 객체 자동생성  -->
 	<context:component-scan base-package="com.overware.aop"></context:component-scan>
 
-### 3, 예제용 데이터 베이스 생성
+### 3.예제용 데이터 베이스 생성
       create table tbl_user(
           uid varchar(50),
           upw varchar(50),
@@ -89,7 +89,7 @@ AOP관련 연습1(AOP적용 하기위한 준비)
 		//포인트 증가,감소(Impl에서는 map으로 set:두개의 파라미터를 사용하니까 )
 		public void updatePoint(String uid, int point) throws Exception;
 	}
-###Mapper(Message,Point)
+### Mapper(Message,Point)
 	<mapper namespace="com.overware.mapper.MessageMapper">
 
 	<insert id="create">
@@ -109,7 +109,7 @@ AOP관련 연습1(AOP적용 하기위한 준비)
 		</update>
 </mapper>
 
-###Service,ServiceImpl
+### Service,ServiceImpl
 	@Service
 	public class MessageServiceImpl implements MessageService {
 
@@ -136,7 +136,7 @@ AOP관련 연습1(AOP적용 하기위한 준비)
 			return messageDAO.readMessage(mno);
 		}
 	}
-###Controller
+### Controller
 	@RestController
 	@RequestMapping("/message")
 	public class MessageController {
