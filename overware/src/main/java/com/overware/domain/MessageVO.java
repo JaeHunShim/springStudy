@@ -4,10 +4,10 @@ import java.util.Date;
 
 public class MessageVO {
 	
-	private Integer mid;
-	private String targetid;
-	private String sender;
-	private String message;
+	private Integer mid; //
+	private String targetid; // 메세지 받는 사람의 아이디 
+	private String sender; //보내는 사람 id
+	private String message;//메세지 내용
 	private Date opendate;
 	private Date senddate;
 	

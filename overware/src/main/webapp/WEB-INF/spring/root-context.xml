@@ -44,6 +44,13 @@
 	<!-- aop기능을 설정 할때 사용 -->
 	<aop:config></aop:config>
 	<aop:aspectj-autoproxy></aop:aspectj-autoproxy>
+	<!-- 트랜잭션 설정  DataSource를 사용하는 경우에는 DataSource를 주입받도록 한다 .-->
+	<bean id="transactionManager"
+		class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+		<property name="dataSource" ref="dataSource"></property>
+	</bean>
+	<!-- Transaction 어노테이션을 사용하기 위한 설정  -->
+	<tx:annotation-driven/>
 	
 </beans>
 
