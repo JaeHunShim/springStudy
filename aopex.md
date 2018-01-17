@@ -225,3 +225,21 @@ AOP관련 연습2(Log)
 
 2.Around 관련 로그
 ![afgerLog](./img/afterLog.png)
+
+---
+* ###  오류들과 주의사항
+
+1. AOP 잡아주지 못할때 에러
+
+
+**Pointcut is malformed: Pointcut is not well-formed: expecting 'name pattern' at character position 50 execution(*com.overware.service.Message Service*.*(..))**
+
+문제는 pointcut 잡아줄때 *com 에서 * 다음 한칸을 띄어야 한다는점이었다
+
+2. AOP log info 정보가 안나왔을때 log4j.xml 파일의
+
+		<root>
+		<priority value="info" />
+		<appender-ref ref="console" />
+		</root>
+priority value="" 값을  **"info"** 로 주면 된다.
