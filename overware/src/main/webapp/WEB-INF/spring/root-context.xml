@@ -41,7 +41,9 @@
 	<context:component-scan base-package="com.overware.service"></context:component-scan>
 	
 	<context:component-scan base-package="com.overware.aop"></context:component-scan>
+	<!-- aop기능을 설정 할때 사용 -->
+	<aop:config></aop:config>
 	<aop:aspectj-autoproxy></aop:aspectj-autoproxy>
-
+	
 </beans>
 

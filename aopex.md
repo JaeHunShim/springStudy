@@ -1,4 +1,4 @@
-AOP관련 연습(AOP적용 하기위한 준비)
+AOP관련 연습1(AOP적용 하기위한 준비)
 ===
 ### 1. 관련 라이브러리 다운로드(pom.xml)
         <!-- aop관련 라이브러리 -->
@@ -135,5 +135,93 @@ AOP관련 연습(AOP적용 하기위한 준비)
 			//다작업한후에는 메세지를 조회해서 반환
 			return messageDAO.readMessage(mno);
 		}
-
 	}
+###Controller
+	@RestController
+	@RequestMapping("/message")
+	public class MessageController {
+
+		@Inject
+		MessageService messageService;
+
+		@RequestMapping(value="/",method=RequestMethod.POST)
+			public ResponseEntity<String> addMessage(@RequestBody MessageVO vo) {
+
+				ResponseEntity<String> entity = null;
+
+				try {
+					messageService.addMessage(vo);
+					entity= new ResponseEntity<>("SUCCESS",HttpStatus.OK);
+
+					}catch(Exception e) {
+						e.printStackTrace();
+						entity=new ResponseEntity<>(e.getMessage(),HttpStatus.BAD_REQUEST);
+					}
+					return entity;
+				}
+	}
+@REST컨트롤러를 사용해서 Ajax로 데이터를 보내고 그때 로그정보들이 어떻게 찍히는지에 대해서 연습.
+
+AOP관련 연습2(Log)
+===
+* ## AOP 관련 용어들
+
+>1. **Aspect**:로깅이나  보안, 트랜잭션과 같은 기능에 대한용어로서  @Asperct를 사용해서  AOP기능을 하는 클래스에 선언해서 이게 AOP라고 말해주는 기능.
+>2. **Adive**: 실제로 적용시키고 싶은 코드, 즉  우리는 Ascpect를 구현하는 것이 아니라 Advice를 구현하고 그에 맞게 @Aspect를 적용하는 것이다.
+>3. **JoinPoints**: 작성된 Advice가 실행되는 위치를 말한다.  쓰이는 기능들은 아래와 같다.
+>>* **Object[] getArgs()**: 전달되는 모든 파라미터들을 Object의 배열로 가지고옴
+>>* **Signature getSignature()**: 실행하는 대상 객체의 메소드에 대한 정보를 알아냄
+>>* **Stirng getKind()**: 해당 Advice의 타입을 알아낸다
+>4. **Pointcuts**:여러메소드 중 실제 Advice가 적용될 대상을 선택하는 정보
+>5. **target**:대상 메소드를 가지는 객체
+>6. **proxy**:Advice가 적용되었을때 만들어지는 객체
+>7. **introduction**:target에는 없는 새로운 메소드나 변수를 추가하는 기능
+>8. **Weaving**:Advice와 target이 결합되어서 프록시 객체를 만드는 과정
+---
+* ### 쓰이는 어노테이션
+>1.**Before:** target 의 메소드를 호출하기 전에 적용
+>2.**After:** target의 메소드 호출후 예외상관없이 적용(After returning, After thowing 두가지 포함)
+>3.**Around:** target이 메소드 호출 이전과 이후 모두 적용(제일 광범위하게 사용됨) Around사용시 리턴 타입은 Object로 선언해야 한다 . 이유는 Around 는 메소드를 직접호출하고, 결과를 반환 해야만 정상적인 처리가  이루어지기 때문이다
+---
+
+* ### Advice 클래스
+
+		@Component
+		@Aspect
+		public class SampleAdvice {
+
+			private static final Logger logger = LoggerFactory.getLogger(SampleAdvice.class);
+
+			@Before("execution(* com.overware.service.MessageService*.*(..))")
+			public void startLog(JoinPoint jp) {
+
+				logger.info("----------------");
+				logger.info("----------------");
+				logger.info(Arrays.toString(jp.getArgs())); // 전달되는 파라미터들을 object배열로 가지고 온다
+				logger.info("=========================");
+			}
+			@Around("execution(* com.overware.service.MessageService*.*(..))")
+			public Object timeLog(ProceedingJoinPoint pjp) throws Throwable{
+				long startTime=System.currentTimeMillis();
+				logger.info(Arrays.toString(pjp.getArgs()));
+
+				Object result= pjp.proceed();
+
+				long endTime= System.currentTimeMillis();
+				logger.info(pjp.getSignature().getName()+":"+(endTime-startTime));
+				logger.info("--------------------------------------------------------");
+
+				return result;
+			}
+		}
+**Before의 경우**는 파라미터를 보면  JoinPoint를 주어서 자기가 원하는 데이터를 가지고 오게끔했는데 보면 jp.getArgs() 를 사용해서 전달되는 파라미터들을 vo객체로 가져와서 보여지는걸  아래 결과물에서 볼수 있다
+**Around의 경우**는 끝부분 로그를 보면 getSignature()를 사용해서 해당 메소드를 호출했고 pjp.getArgs()를 이용해서 해당객체의 메소드까지 실행해서 리턴하는 것까지 보여지고있다. (**ProceedingJoinPoint** 는 JoinPoint의 상위 클래스로 JoinPoint의 내용을 다 가지고 있으면서 target의 메소드까지 실행하는 기능을 가지고있다.)
+
+---
+* ### 결과물과  내용
+1.Berfore관련 로그
+
+![beforeLog](./img/beforeLog.png )
+
+2.Around 관련 로그
+![afgerLog](./img/afterLog.png)
