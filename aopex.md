@@ -180,7 +180,9 @@ AOP관련 연습2(Log)
 ---
 * ### 쓰이는 어노테이션
 >1.**Before:** target 의 메소드를 호출하기 전에 적용
+
 >2.**After:** target의 메소드 호출후 예외상관없이 적용(After returning, After thowing 두가지 포함)
+
 >3.**Around:** target이 메소드 호출 이전과 이후 모두 적용(제일 광범위하게 사용됨) Around사용시 리턴 타입은 Object로 선언해야 한다 . 이유는 Around 는 메소드를 직접호출하고, 결과를 반환 해야만 정상적인 처리가  이루어지기 때문이다
 ---
 
