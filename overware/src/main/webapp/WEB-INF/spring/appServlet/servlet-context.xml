@@ -20,9 +20,18 @@
 		<beans:property name="prefix" value="/WEB-INF/views/" />
 		<beans:property name="suffix" value=".jsp" />
 	</beans:bean>
+	<!-- 파일 업로드로 들어오는 데이터를 처리할 객체로 웹에 관련되어있기 때문에 servet-context에서 설정해준다.  -->
+	<beans:bean id="multipartResolver"
+		class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+		<beans:property name="maxUploadSize" value="10485760"></beans:property>
+	</beans:bean>
 	
 	<context:component-scan base-package="com.overware.spring" />
-	
+	<!-- 실제 파일 업로드 경로 -->
+	<beans:bean id="uploadPath" class="java.lang.String">
+		<beans:constructor-arg value="D:\\image\\upload">
+		</beans:constructor-arg>
+	</beans:bean>
 	
 	
 </beans:beans>
