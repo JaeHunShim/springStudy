@@ -63,12 +63,13 @@ small{
 					str="<div>"
 						+"<a href='displayFile?fileName="+getImageLink(data)+"'>"
 						+"<img src='displayFile?fileName="+data+"'/></a>"
-						+getImageLink(data)+"</div>";		
+						+getImageLink(data)
+						+"<small data-src="+data+">X</small></div>";		
 				}else{
 					str="<div>"
 						/* +data+ */
 						+getOriginalName(data)
-						+"</div>";
+						+"<small data-src="+data+">X</small></div>";
 				}
 				// upladedList 클래스태그 뒤에 생성한 str을 추가함 
 				$(".uploadedList").append(str);
@@ -106,7 +107,26 @@ small{
 		
 		return front+end;
 	}
-	 
+	//파일 삭제 처리 
+ $(document).ready(function(){
+	
 
+	$(".uploadedList").on("click","small",function(event){
+		
+		var that=(this);
+		
+		$.ajax({
+			url:"deleteFile",
+			type:"post",
+			data:{fileName:$(this).attr("data-src")},
+			dataType:"text",
+			success:function(result){
+				if(result=="deleted"){
+					alert("삭제되었습니다.");
+				}
+			}
+		});
+	});
+});
 </script>
 </html>
