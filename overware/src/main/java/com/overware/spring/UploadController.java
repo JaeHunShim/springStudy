@@ -125,9 +125,9 @@ public class UploadController {
 	public ResponseEntity<String> deleteFile(String fileName) throws Exception{
 		
 		logger.info("deleteFile" + fileName);
-		
+		// 1. 확장자를 받아와서 
 		String formatName= fileName.substring(fileName.lastIndexOf(".")+1);
-		
+		// 2. 확장자를 검색해서 이미지 파일일 경우와 아닌 경우를 구분해서 삭제 하게 함
 		MediaType mType=MediaUtils.getMediaType(formatName);
 		
 		if(mType!=null) {

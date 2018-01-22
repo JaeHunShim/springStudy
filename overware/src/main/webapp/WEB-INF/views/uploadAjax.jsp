@@ -108,12 +108,9 @@ small{
 		return front+end;
 	}
 	//파일 삭제 처리 
- $(document).ready(function(){
-	
-
 	$(".uploadedList").on("click","small",function(event){
 		
-		var that=(this);
+		var that=$(this);
 		
 		$.ajax({
 			url:"deleteFile",
@@ -121,12 +118,12 @@ small{
 			data:{fileName:$(this).attr("data-src")},
 			dataType:"text",
 			success:function(result){
-				if(result=="deleted"){
+				if(result =='deleted'){
 					alert("삭제되었습니다.");
+					that.parent("div").remove(); //div태그 삭제 하는부분 
 				}
 			}
 		});
 	});
-});
 </script>
 </html>
