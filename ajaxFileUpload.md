@@ -14,6 +14,7 @@
   예를들어서 Json형태로 보낼때 contentType을 application/json 형식으로 보냈는데 이런식으로 안하고 형식을 지정안해주면 true값을  application/x-www-form-urlencode형식이 된다.
   processData의 경우는 데이터를 일반적인 string으로 변환할지 결정하는 것인데. 기본값은  application/x-www-form-urlencoded 형식이 된다.  다른 형식으로 보내기위해서 자동으로 변환되지 않게 **false**로 준것 즉, formData형식으로 해야하기 때문에 자동으로 형식이 변하지 않도록 함.
   **4. parent.remove() :** 부모요소를 찾아서 제거 즉 여기서는 that.parent("div").remove 를사용했는데 이 의미는 현재 that은 "small"쪽 테그인데 이 부모요소중에 div 태그를 삭제 한다는 의미이다.  이 함수를 사용한이유는 이미지나 파일을 삭제한후에 view단에서 보이지 삭제한후에 보여지면 안되기때문이다.
+  
 
 
     ---
