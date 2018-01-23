@@ -32,6 +32,14 @@
 		<beans:constructor-arg value="D:\\image\\upload">
 		</beans:constructor-arg>
 	</beans:bean>
+	<!--  인터셉터를 빈으로 등록  -->
+	<beans:bean id="sampleInterceptor" class="com.overware.interceptor.SampleInterceptor"></beans:bean>
 	
-	
+	<interceptors>
+		<interceptor>
+			<mapping path="/doA"/>
+			<mapping path="/doB"/>
+			<beans:ref bean="sampleInterceptor"/>
+		</interceptor>
+	</interceptors>
 </beans:beans>
