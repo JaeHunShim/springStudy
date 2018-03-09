@@ -42,4 +42,5 @@
 			<beans:ref bean="sampleInterceptor"/>
 		</interceptor>
 	</interceptors>
+	
 </beans:beans>

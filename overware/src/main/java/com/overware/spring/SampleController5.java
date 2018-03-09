@@ -17,7 +17,7 @@ public class SampleController5 {
 	public @ResponseBody ProductVO doJson() {
 		
 		ProductVO vo = new ProductVO("재훈", 100000);
-		logger.info("Json으로 가는값은------"+vo);
+		logger.info("Json으로 가는값은------	"+vo);
 		return vo;
 	}
 }
