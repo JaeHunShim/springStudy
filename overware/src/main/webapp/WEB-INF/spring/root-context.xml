@@ -50,12 +50,12 @@
 		<property name="dataSource" ref="dataSource"></property>
 	</bean>
 	<!-- 메일 발송 -->
-	<bean id="mailSender" class ="org.springframework.mail.javamail.JavaMailSender">
+	<bean id="mailSender" class ="org.springframework.mail.javamail.JavaMailSenderImpl">
       <property name="host" value="smtp.gmail.com" />
       <property name="port" value="587" />
       <property name="username" value="jaehuniya@gmail.com" />
       <!-- 패스워드는 사용자 패스워드 넣으면 됨  -->
-      <property name="password" value="userpassword" /> 
+      <property name="password" value="userpasswrod" /> 
       <property name="javaMailProperties">
          <props>
                <prop key="mail.transport.protocol">smtp</prop>
@@ -64,7 +64,6 @@
                <prop key="mail.debug">true</prop>
          </props>
       </property>
- 
    </bean>
 	<!-- Transaction 어노테이션을 사용하기 위한 설정  -->
 	<tx:annotation-driven/>
